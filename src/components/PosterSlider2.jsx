@@ -1,12 +1,31 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import Poster from "../Poster/Poster.Component";
 
-const PosterSlider = (props) => {
-  const { title, subtitle, posters, isDark} = props;
+const CombinedPosterSlider = (props) => {
+  const { title, subtitle, posters, isDark } = props;
 
+  // Poster component defined within this file
+  const Poster = ({ id, poster_path, original_title, isDark }) => (
+    <Link to={`/concerts/${id}`}>
+      <div className="flex flex-col items-start gap-2 px-1 md:px-3">
+        <div className="h-40 md:h-80">
+          <img
+            src={`${poster_path}`}
+            alt="poster"
+            className="w-full h-full rounded-md"
+          />
+        </div>
+        <h3 className={`text-lg font-bold ${isDark ? "text-white" : "text-black"}`}>
+          {original_title}
+        </h3>
+      </div>
+    </Link>
+  );
+
+  // Slider settings for react-slick
   const settings = {
-    infinte: false,
+    infinite: false,
     autoplay: false,
     slidesToShow: 5,
     slidesToScroll: 4,
@@ -42,11 +61,7 @@ const PosterSlider = (props) => {
   return (
     <>
       <div className="flex flex-col items-start sm:ml-3 my-2">
-        <h3
-          className={`text-2xl font-bold ${
-            isDark ? "text-white" : "text-black"
-          }`}
-        >
+        <h3 className={`text-2xl font-bold ${isDark ? "text-white" : "text-black"}`}>
           {title}
         </h3>
         <p className={`text-sm ${isDark ? "text-white" : "text-black"}`}>
@@ -55,11 +70,11 @@ const PosterSlider = (props) => {
       </div>
       <Slider {...settings}>
         {posters.map((each, index) => (
-          <Poster {...each} isDark={isDark} key={index} />
+          <Poster key={index} {...each} isDark={isDark} />
         ))}
       </Slider>
     </>
   );
 };
 
-export default PosterSlider;
+export default CombinedPosterSlider;

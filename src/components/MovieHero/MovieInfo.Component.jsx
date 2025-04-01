@@ -3,7 +3,7 @@ import { MovieContext } from "../../context/Movie.context";
 import PaymentModel from "../PaymentModel/Payment.Component";
 
 const MovieInfo = () => {
-  const { price, setIsOpen, isOpen, rentMoive, buyMoive, movie } =
+  const { price, setIsOpen, isOpen, movie } =
     useContext(MovieContext);
 
   const genres = movie.genres?.map(({ name }) => name).join(", ");
@@ -22,7 +22,7 @@ const MovieInfo = () => {
             {movie.runtime} min | {genres}
           </h4>
         </div>
-        <div className="flex items-center gap-3 ">
+        {/* <div className="flex items-center gap-3 ">
           <button
             className="bg-red-500 w-full py-3 text-white font-semibold rounded-lg px-2 mx-4 font-poppins"
             onClick={rentMoive}
@@ -35,7 +35,7 @@ const MovieInfo = () => {
           >
             Buy ₹ 599
           </button>
-        </div>
+        </div> */}
       </div>
     </>
   );
